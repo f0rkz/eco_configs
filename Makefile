@@ -20,7 +20,7 @@ build: clean
 	@docker build --build-arg ECO_TAG=${ECO_TAG} -t ${PACKAGE_NAME}:${TAG} .
 
 run: build
-	@docker run --rm -v $(CURDIR)/Configs:/Configs -v $(CURDIR)/Mods:/Mods -it ${PACKAGE_NAME}:${TAG} /usr/bin/copy_configs.sh
+	@docker run --rm -v $(CURDIR)/Configs:/Configs -v $(CURDIR)/Mods:/Mods -v $(CURDIR)/conf.d:/conf.d -v $(CURDIR)/mod.d:/mod.d -it ${PACKAGE_NAME}:${TAG} /usr/bin/copy_configs.sh
 
 login: build
 	@docker run --rm -v $(CURDIR)/Configs:/Configs -v $(CURDIR)/Mods:/Mods -it ${PACKAGE_NAME}:${TAG} /bin/bash
